@@ -1,8 +1,8 @@
 {
   "name": "react-native-animated-splash-screen",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "private": false,
-  "description": "Animated SplashScreen component for React Native project.",
+  "description": "Animated splash screen component for React Native project.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -70,7 +70,7 @@ class AnimatedSplash extends React.Component {
         {
           scale: loadingProgress.interpolate({
             inputRange: [0, 10, 100],
-            outputRange: [1, 1, 40]
+            outputRange: [1, 1, 65]
           })
         }
       ]
@@ -81,7 +81,7 @@ class AnimatedSplash extends React.Component {
         {
           scale: loadingProgress.interpolate({
             inputRange: [0, 10, 100],
-            outputRange: [1, 0.8, 15]
+            outputRange: [1, 0.8, 10]
           })
         }
       ]
@@ -89,7 +89,7 @@ class AnimatedSplash extends React.Component {
 
     const logoOpacity = {
       opacity: loadingProgress.interpolate({
-        inputRange: [0, 25, 100],
+        inputRange: [0, 20, 100],
         outputRange: [1, 0, 0],
         extrapolate: "clamp"
       })
@@ -174,9 +174,9 @@ const styles = StyleSheet.create({
 
 AnimatedSplash.propTypes = {
   isLoaded: PropTypes.bool.isRequired,
-  logoImage: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  logoImage: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object])
     .isRequired,
-  children: PropTypes.instanceOf(React),
+  children: PropTypes.element,
   backgroundColor: PropTypes.string,
   logoWidth: PropTypes.number,
   logoHeight: PropTypes.number,
