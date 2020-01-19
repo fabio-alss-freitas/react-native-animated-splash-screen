@@ -1,29 +1,41 @@
+<h1 align="center">
+  React Native Animated Splash Screen
+</h1>
+
+<div align="center">
+
+Animated splash screen for Android and iOS. It is based on [Implementing Twitter’s App Loading Animation in React Native](https://facebook.github.io/react-native/blog/2018/01/18/implementing-twitters-app-loading-animation-in-react-native) topic from RN. This use an Image instead of MaskedView to work on both platforms.
+
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
 [![Version](https://img.shields.io/npm/v/react-native-animated-splash-screen.svg)](https://www.npmjs.com/package/react-native-animated-splash-screen)
-![GitHub All Releases](https://img.shields.io/github/downloads/fabio-alss-freitas/react-native-animated-splash-screen/total)
 [![npm](https://img.shields.io/npm/dt/react-native-animated-splash-screen.svg)](https://www.npmjs.com/package/react-native-animated-splash-screen)
 ![GitHub issues](https://img.shields.io/github/issues-raw/fabio-alss-freitas/react-native-animated-splash-screen)
 
-# React Native Animated Splash Screen
 ![GitHub followers](https://img.shields.io/github/followers/fabio-alss-freitas?style=social)
 ![GitHub stars](https://img.shields.io/github/stars/fabio-alss-freitas/react-native-animated-splash-screen?style=social)
 
-Animated splash screen for Android and iOS. It is based on [Implementing Twitter’s App Loading Animation in React Native](https://facebook.github.io/react-native/blog/2018/01/18/implementing-twitters-app-loading-animation-in-react-native) topic from RN. To work on Android, it use an Image instead of MaskedView.
+</div>
 
-## Examples
-![React Native Animated Splash Screen Android 1](https://i.postimg.cc/wMqmK0Wz/ezgif-3-d649b8902f22.gif)
-![React Native Animated Splash Screen Android 2](https://i.postimg.cc/5yTkKY3w/ezgif-3-2b23776764cf.gif)
+<p align="center" >
+  <kbd>
+    <img src="https://i.postimg.cc/wMqmK0Wz/ezgif-3-d649b8902f22.gif" title="Scroll Demo" float="left">
+  </kbd>
+  <kbd>
+    <img src="https://i.postimg.cc/5yTkKY3w/ezgif-3-2b23776764cf.gif" title="Priority Demo" float="left">
+  </kbd>
+  <br>
+  <em>SplashAnimated example app.</em>
+</p>
 
 ## Features
-- Custom background color
-- Custom logo
-- Custom logo size
+
+-   [x] Custom background color.
+-   [x] Custom logo.
+-   [x]  Custom logo size.
 
 ## Installation
 `yarn add react-native-animated-splash-screen`
-
 or
-
 `npm install --save react-native-animated-splash-screen`
 
 ## Usage
@@ -56,8 +68,8 @@ render() {
 | children        | Children to render inside this component.    | Node    |          |                           `null`                            |
 | preload         | Condition to load children component while wait isLoaded prop be True.   | Boolean |          |                            true                             |
 
+
 ## Example with React Navigation
-#### 1) Create a navigator (Stack or Switch) normally:
 ```javascript
 const AppNavigator = createStackNavigator(
   {
@@ -78,15 +90,9 @@ const AppNavigator = createStackNavigator(
     initialRouteName: "home"
   }
 );
-```
 
-#### 2) Create an app container:
-```javascript
 const Container = createAppContainer(AppNavigator);
-```
 
-#### 3) Pass the container as a children of AnimatedSplash:
-```javascript
 class App extends React.Component {
   state = {
     isLoaded: false
@@ -116,9 +122,24 @@ export default App;
 ```
 
 ## Example with React Navigation (setting isLoaded inside a screen of navigator)
-##### Make sure you have done the [previous step](https://github.com/fabio-alss-freitas/react-native-animated-splash-screen/new/master?readme=1#example-with-react-navigation).
-#### 1) Pass the IsLoaded function as screenProps of Container:
+#### Navigator
 ```javascript
+const AppNavigator = createSwitchNavigator(
+  {
+    home: {
+      screen: props => (
+        <HomeScreen {...props} setAppLoaded={props.screenProps.setAppLoaded} />
+      )
+    },
+    dashboard: { screen: DashboardScreen }
+  },
+  {
+    initialRouteName: "home"
+  }
+);
+
+const Container = createAppContainer(AppNavigator);
+
 class App extends React.Component {
   state = {
     isLoaded: false
@@ -146,30 +167,27 @@ class App extends React.Component {
 export default App;
 ```
 
-#### 2) Update your navigator to handle screenProps on the chosen screen:
-```javascript
-const AppNavigator = createSwitchNavigator(
-  {
-    home: {
-      screen: props => (
-        <HomeScreen {...props} setAppLoaded={props.screenProps.setAppLoaded} />
-      )
-    },
-    dashboard: { screen: DashboardScreen }
-  },
-  {
-    initialRouteName: "home"
-  }
-);
-```
 
-#### 2) Call the function on the chosen screen:
+#### HomeScreen
 ```javascript
-this.props.setAppLoaded();
+class HomeScreen extends React.Component {
+
+...
+
+  async componentDidMount() {
+    await loadAsync();
+    this.props.setAppLoaded();
+  }
+  
+...
+
+}
+
+export default HomeScreen
 ```
 
 ## Author
-Fabio Freitas
+[Fabio Freitas](https://github.com/fabio-alss-freitas)
 
 ## License
 MIT
