@@ -7,6 +7,7 @@
 # React Native Animated Splash Screen
 ![GitHub followers](https://img.shields.io/github/followers/fabio-alss-freitas?style=social)
 ![GitHub stars](https://img.shields.io/github/stars/fabio-alss-freitas/react-native-animated-splash-screen?style=social)
+
 Animated splash screen for Android and iOS. It is based on [Implementing Twitter’s App Loading Animation in React Native](https://facebook.github.io/react-native/blog/2018/01/18/implementing-twitters-app-loading-animation-in-react-native) topic from RN. To work on Android, it use an Image instead of MaskedView.
 
 ## Examples
@@ -168,7 +169,7 @@ this.props.setAppLoaded();
 ```
 
 ## Author
-[Fabio Freitas](http://cmichel.io)
+Fabio Freitas
 
 ## License
 MIT
