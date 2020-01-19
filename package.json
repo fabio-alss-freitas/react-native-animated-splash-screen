@@ -1,0 +1,37 @@
+{
+  "name": "react-native-animated-splash-screen",
+  "version": "1.0.0",
+  "private": false,
+  "description": "Animated SplashScreen component for React Native project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fabio-alss-freitas/react-native-animated-splash-screen.git"
+  },
+  "keywords": [
+    "react-native",
+    "react-component",
+    "react-native-component",
+    "react",
+    "react native",
+    "mobile",
+    "ios",
+    "android",
+    "ui",
+    "splashscreen",
+    "splash",
+    "animated",
+    "splash animated"
+  ],
+  "author": "Fabio Freitas",
+  "license": "MIT",
+  "devDependencies": {
+    "metro-react-native-babel-preset": "^0.57.0"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2"
+  }
+}
