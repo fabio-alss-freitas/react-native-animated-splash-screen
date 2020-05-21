@@ -2,24 +2,26 @@
 import PropTypes from "prop-types";
 import * as React from "react";
 import {
+  View,
   Animated,
-  Dimensions,
   StatusBar,
+  Dimensions,
   StyleSheet,
-  View
 } from "react-native";
-const Expo = require("expo-constants");
-
-const { width, height } = Dimensions.get("screen");
+import {
+  ScreenWidth,
+  ScreenHeight,
+  getStatusBarHeight,
+} from "@freakycoder/react-native-helpers";
 
 class AnimatedSplash extends React.Component {
   static defaultProps = {
-    isLoaded: false
+    isLoaded: false,
   };
 
   state = {
+    animationDone: false,
     loadingProgress: new Animated.Value(0),
-    animationDone: false
   };
 
   componentDidUpdate(prevProps) {
@@ -30,10 +32,10 @@ class AnimatedSplash extends React.Component {
       Animated.timing(loadingProgress, {
         toValue: 100,
         duration: 1000,
-        useNativeDriver: true
+        useNativeDriver: true,
       }).start(() => {
         this.setState({
-          animationDone: true
+          animationDone: true,
         });
       });
     }
@@ -55,14 +57,20 @@ class AnimatedSplash extends React.Component {
 
   render() {
     const { loadingProgress, animationDone } = this.state;
-    const { logoImage, backgroundColor, logoWidth, logoHeight } = this.props;
+    const {
+      logoImage,
+      logoWidth,
+      logoHeight,
+      backgroundColor,
+      disableBackgroundImage,
+    } = this.props;
 
     const opacityClearToVisible = {
       opacity: loadingProgress.interpolate({
         inputRange: [0, 15, 30],
         outputRange: [0, 0, 1],
-        extrapolate: "clamp"
-      })
+        extrapolate: "clamp",
+      }),
     };
 
     const imageScale = {
@@ -70,10 +78,10 @@ class AnimatedSplash extends React.Component {
         {
           scale: loadingProgress.interpolate({
             inputRange: [0, 10, 100],
-            outputRange: [1, 1, 65]
-          })
-        }
-      ]
+            outputRange: [1, 1, 65],
+          }),
+        },
+      ],
     };
 
     const logoScale = {
@@ -81,18 +89,18 @@ class AnimatedSplash extends React.Component {
         {
           scale: loadingProgress.interpolate({
             inputRange: [0, 10, 100],
-            outputRange: [1, 0.8, 10]
-          })
-        }
-      ]
+            outputRange: [1, 0.8, 10],
+          }),
+        },
+      ],
     };
 
     const logoOpacity = {
       opacity: loadingProgress.interpolate({
         inputRange: [0, 20, 100],
         outputRange: [1, 0, 0],
-        extrapolate: "clamp"
-      })
+        extrapolate: "clamp",
+      }),
     };
 
     const appScale = {
@@ -100,47 +108,55 @@ class AnimatedSplash extends React.Component {
         {
           scale: loadingProgress.interpolate({
             inputRange: [0, 7, 100],
-            outputRange: [1.1, 1.05, 1]
-          })
-        }
-      ]
+            outputRange: [1.1, 1.05, 1],
+          }),
+        },
+      ],
     };
 
     return (
-      <View style={styles.flex}>
+      <View style={[styles.flex]}>
         <StatusBar backgroundColor={backgroundColor || "red"} animated />
         {!animationDone && <View style={StyleSheet.absoluteFill} />}
-        <View style={styles.flexCentered}>
+        <View style={[styles.flexCentered, { backgroundColor: "transparent" }]}>
           {!animationDone && (
-            <View style={[StyleSheet.absoluteFill, { backgroundColor }]} />
+            <Animated.View
+              style={[
+                StyleSheet.absoluteFill,
+                logoOpacity,
+                {
+                  backgroundColor: backgroundColor || "red",
+                },
+              ]}
+            />
           )}
-          <Animated.View style={[opacityClearToVisible, appScale, styles.flex]}>
+          <Animated.View style={[appScale, styles.flex, opacityClearToVisible]}>
             {this.renderChildren()}
           </Animated.View>
-          {!animationDone && (
+          {!animationDone && !disableBackgroundImage && (
             <Animated.Image
-              resizeMode={"cover"}
-              style={[
-                styles.maskImageStyle,
-                { tintColor: backgroundColor || "red" },
-                imageScale
-              ]}
+              resizeMode="cover"
               source={require("./background.png")}
+              style={[
+                imageScale,
+                logoOpacity,
+                { tintColor: backgroundColor || "red" },
+              ]}
             />
           )}
           {!animationDone && (
             <View style={[StyleSheet.absoluteFill, styles.centered]}>
               <Animated.Image
+                source={logoImage}
                 resizeMode={"contain"}
                 style={[
+                  logoScale,
+                  logoOpacity,
                   {
                     height: logoHeight || 150,
-                    width: logoWidth || 150
+                    width: logoWidth || 150,
                   },
-                  logoScale,
-                  logoOpacity
                 ]}
-                source={logoImage}
               />
             </View>
           )}
@@ -152,35 +168,36 @@ class AnimatedSplash extends React.Component {
 
 const styles = StyleSheet.create({
   flex: {
-    flex: 1
+    flex: 1,
   },
   flexCentered: { flex: 1, alignContent: "center", justifyContent: "center" },
   maskImageStyle: {
     ...StyleSheet.absoluteFill,
-    top:
-      Expo != null && Expo.default != null
-        ? Expo.default.statusBarHeight * -1
-        : 0,
-    width,
-    height,
+    width: ScreenWidth,
+    height: ScreenHeight,
+    alignItems: "center",
     justifyContent: "center",
-    alignItems: "center"
+    top: getStatusBarHeight() * -1,
   },
   centered: {
+    alignItems: "center",
     justifyContent: "center",
-    alignItems: "center"
-  }
+  },
 });
 
 AnimatedSplash.propTypes = {
-  isLoaded: PropTypes.bool.isRequired,
-  logoImage: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object])
-    .isRequired,
-  children: PropTypes.element,
-  backgroundColor: PropTypes.string,
+  preload: PropTypes.bool,
   logoWidth: PropTypes.number,
+  children: PropTypes.element,
   logoHeight: PropTypes.number,
-  preload: PropTypes.bool
+  backgroundColor: PropTypes.string,
+  isLoaded: PropTypes.bool.isRequired,
+  disableBackgroundImage: PropTypes.bool,
+  logoImage: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+  ]).isRequired,
 };
 
 export default AnimatedSplash;
