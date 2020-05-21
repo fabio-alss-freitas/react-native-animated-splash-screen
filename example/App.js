@@ -16,7 +16,7 @@ const App = () => {
         logoWidht={150}
         logoHeight={150}
         isLoaded={isLoaded}
-        disableBackgroundImage
+        // disableBackgroundImage
         backgroundColor={"#262626"}
         logoImage={require("./assets/logo.png")}
       >
@@ -25,9 +25,10 @@ const App = () => {
             flex: 1,
             alignItems: "center",
             justifyContent: "center",
+            backgroundColor: "#262626",
           }}
         >
-          <Text>Hello</Text>
+          <Text style={{ color: "#fdfdfd", fontSize: 30 }}>Hello</Text>
         </View>
       </AnimatedSplash>
     </>
