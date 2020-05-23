@@ -50,6 +50,7 @@ render() {
         isLoaded={this.state.isLoaded}
         logoImage={require("./assets/logo.png")}
         backgroundColor={"#262626"}
+        disableBackgroundImage
         logoHeight={150}
         logoWidht={150}
       >
