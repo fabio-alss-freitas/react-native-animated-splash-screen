@@ -1,6 +1,6 @@
 {
   "name": "react-native-animated-splash-screen",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "private": false,
   "description": "Animated splash screen component for React Native project.",
   "main": "index.js",
@@ -24,7 +24,9 @@
     "splashscreen",
     "splash",
     "animated",
-    "splash animated"
+    "splash animated",
+    "expo",
+    "expo splash"
   ],
   "author": "Fabio Freitas",
   "license": "MIT",

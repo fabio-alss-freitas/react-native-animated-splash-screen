@@ -10,6 +10,7 @@ Animated splash screen for Android and iOS. It is based on [Implementing Twitter
 [![Version](https://img.shields.io/npm/v/react-native-animated-splash-screen.svg)](https://www.npmjs.com/package/react-native-animated-splash-screen)
 [![npm](https://img.shields.io/npm/dt/react-native-animated-splash-screen.svg)](https://www.npmjs.com/package/react-native-animated-splash-screen)
 ![GitHub issues](https://img.shields.io/github/issues-raw/fabio-alss-freitas/react-native-animated-splash-screen)
+[![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-000.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://expo.io/)
 
 ![GitHub followers](https://img.shields.io/github/followers/fabio-alss-freitas?style=social)
 ![GitHub stars](https://img.shields.io/github/stars/fabio-alss-freitas/react-native-animated-splash-screen?style=social)
@@ -18,10 +19,13 @@ Animated splash screen for Android and iOS. It is based on [Implementing Twitter
 
 <p align="center" >
   <kbd>
-    <img src="https://i.postimg.cc/wMqmK0Wz/ezgif-3-d649b8902f22.gif" title="Scroll Demo" float="left">
+    <img src="https://i.postimg.cc/wMqmK0Wz/ezgif-3-d649b8902f22.gif" title="Demo" float="left">
   </kbd>
   <kbd>
-    <img src="https://i.postimg.cc/5yTkKY3w/ezgif-3-2b23776764cf.gif" title="Priority Demo" float="left">
+    <img src="https://i.postimg.cc/8C4wzxZ6/ezgif-3-938850179141.gif" title="Demo" float="left">
+  </kbd>
+  <kbd>
+    <img src="https://i.postimg.cc/5yTkKY3w/ezgif-3-2b23776764cf.gif" title="Demo" float="left">
   </kbd>
   <br>
   <em>SplashAnimated example app.</em>
@@ -30,8 +34,10 @@ Animated splash screen for Android and iOS. It is based on [Implementing Twitter
 ## Features
 
 - [x] Custom background color.
+- [x] Custom background image.
 - [x] Custom logo.
 - [x] Custom logo size.
+- [x] It works both: Expo and Pure React Native. (Thanks to [WrathChaos](https://github.com/WrathChaos)!)
 
 ## Installation
 
@@ -47,10 +53,10 @@ import AnimatedSplash from "react-native-animated-splash-screen";
 render() {
     return (
       <AnimatedSplash
+        translucent={true}
         isLoaded={this.state.isLoaded}
         logoImage={require("./assets/logo.png")}
         backgroundColor={"#262626"}
-        disableBackgroundImage
         logoHeight={150}
         logoWidht={150}
       >
@@ -62,16 +68,17 @@ render() {
 
 ## Props
 
-| Name                   | Description                                                            | Type    | Required |                        Default Value                        |
-| :--------------------- | :--------------------------------------------------------------------- | :------ | :------: | :---------------------------------------------------------: |
-| isLoaded               | Condition to show children component and finish the animation.         | Boolean |    ✓     |                                                             |
-| backgroundColor        | Splash screen background color.                                        | String  |          | ![#f00](https://placehold.it/15/f00/000000?text=+) `'#f00'` |
-| logoImage              | Splash screen logo image.                                              | Object  |    ✓     |                                                             |
-| logoWidth              | Logo image width in `px`.                                              | Number  |          |                             150                             |
-| logoHeight             | Logo image height in `px`.                                             | Number  |          |                             150                             |
-| children               | Children to render inside this component.                              | Node    |          |                           `null`                            |
-| preload                | Condition to load children component while wait isLoaded prop be True. | Boolean |          |                            true                             |
-| disableBackgroundImage | disable the background image                                           | Boolean |          |                            false                            |
+| Name                   | Description                                                                                                                                                                                      | Type    | Required |                        Default Value                        |
+| :--------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ | :------: | :---------------------------------------------------------: |
+| isLoaded               | Condition to show children component and finish the animation.                                                                                                                                   | Boolean |    ✓     |                                                             |
+| backgroundColor        | Splash screen background color.                                                                                                                                                                  | String  |          | ![#f00](https://placehold.it/15/f00/000000?text=+) `'#f00'` |
+| logoImage              | Splash screen logo image.                                                                                                                                                                        | Object  |    ✓     |                                                             |
+| logoWidth              | Logo image width in `px`.                                                                                                                                                                        | Number  |          |                             150                             |
+| logoHeight             | Logo image height in `px`.                                                                                                                                                                       | Number  |          |                             150                             |
+| children               | Children to render inside this component.                                                                                                                                                        | Node    |          |                           `null`                            |
+| preload                | Condition to load children component while wait isLoaded prop be True.                                                                                                                           | Boolean |          |                            true                             |
+| disableBackgroundImage | Disable the background image                                                                                                                                                                     | Boolean |          |                            false                            |
+| translucent            | When translucent is set to true, the app will draw under the status bar. Example: [here](https://github.com/fabio-alss-freitas/react-native-animated-splash-screen#example-of-translucent-prop)! | Boolean |          |                            false                            |
 
 ## Example with React Navigation
 
@@ -94,23 +101,24 @@ const AppNavigator = createStackNavigator(
   {
     initialRouteName: "home",
   }
-);
+)
 
-const Container = createAppContainer(AppNavigator);
+const Container = createAppContainer(AppNavigator)
 
 class App extends React.Component {
   state = {
     isLoaded: false,
-  };
+  }
 
   async componentDidMount() {
-    await loadAsync();
-    this.setState({ isLoaded: true });
+    await loadAsync()
+    this.setState({ isLoaded: true })
   }
 
   render() {
     return (
       <AnimatedSplash
+        translucent={true}
         isLoaded={this.state.isLoaded}
         logoImage={require("./assets/logo.png")}
         backgroundColor={"#262626"}
@@ -119,11 +127,11 @@ class App extends React.Component {
       >
         <Container />
       </AnimatedSplash>
-    );
+    )
   }
 }
 
-export default App;
+export default App
 ```
 
 ## Example with React Navigation (setting isLoaded inside a screen of navigator)
@@ -134,7 +142,7 @@ export default App;
 const AppNavigator = createSwitchNavigator(
   {
     home: {
-      screen: (props) => (
+      screen: props => (
         <HomeScreen {...props} setAppLoaded={props.screenProps.setAppLoaded} />
       ),
     },
@@ -143,22 +151,23 @@ const AppNavigator = createSwitchNavigator(
   {
     initialRouteName: "home",
   }
-);
+)
 
-const Container = createAppContainer(AppNavigator);
+const Container = createAppContainer(AppNavigator)
 
 class App extends React.Component {
   state = {
     isLoaded: false,
-  };
+  }
 
   setAppLoaded = () => {
-    this.setState({ isLoaded: true });
-  };
+    this.setState({ isLoaded: true })
+  }
 
   render() {
     return (
       <AnimatedSplash
+        translucent={true}
         isLoaded={this.state.isLoaded}
         logoImage={require("./assets/logo.png")}
         backgroundColor={"#262626"}
@@ -167,11 +176,11 @@ class App extends React.Component {
       >
         <Container screenProps={{ setAppLoaded: this.setAppLoaded }} />
       </AnimatedSplash>
-    );
+    )
   }
 }
 
-export default App;
+export default App
 ```
 
 #### HomeScreen
@@ -192,6 +201,21 @@ class HomeScreen extends React.Component {
 
 export default HomeScreen
 ```
+
+## Example of translucent prop
+
+<p align="center" >
+  <kbd>
+    <img src="https://i.postimg.cc/8C4wzxZ6/ezgif-3-938850179141.gif" title="Demo" float="left">
+    <br>
+    <em>translucent={true}</em>
+  </kbd>
+  <kbd>
+    <img src="https://i.postimg.cc/J4Bs7Jp3/ezgif-3-24968f8730b0.gif" title="Demo" float="left">
+    <br>
+    <em>translucent={false}</em>
+  </kbd>
+</p>
 
 ## Author
 
