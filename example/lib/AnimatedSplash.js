@@ -2,11 +2,6 @@
 import PropTypes from "prop-types";
 import * as React from "react";
 import { View, Animated, StatusBar, StyleSheet } from "react-native";
-import {
-  ScreenWidth,
-  ScreenHeight,
-  getStatusBarHeight,
-} from "@freakycoder/react-native-helpers";
 import styles, {
   _solidBackground,
   _dynamicLogoStyle,
@@ -56,13 +51,7 @@ class AnimatedSplash extends React.Component {
 
   render() {
     const { loadingProgress, animationDone } = this.state;
-    const {
-      logoImage,
-      logoWidth,
-      logoHeight,
-      backgroundColor,
-      disableBackgroundImage,
-    } = this.props;
+    const { logoImage, logoWidth, logoHeight, backgroundColor } = this.props;
 
     const opacityClearToVisible = {
       opacity: loadingProgress.interpolate({
@@ -126,7 +115,7 @@ class AnimatedSplash extends React.Component {
           <Animated.View style={[appScale, opacityClearToVisible, styles.flex]}>
             {this.renderChildren()}
           </Animated.View>
-          {!animationDone && !disableBackgroundImage && (
+          {!animationDone && (
             <Animated.Image
               resizeMode="cover"
               source={require("./background.png")}

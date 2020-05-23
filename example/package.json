@@ -10,7 +10,6 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@freakycoder/react-native-helpers": "^0.1.3",
     "react": "16.9.0",
     "react-native": "0.61.5"
   },

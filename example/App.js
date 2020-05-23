@@ -16,7 +16,6 @@ const App = () => {
         logoWidht={150}
         logoHeight={150}
         isLoaded={isLoaded}
-        // disableBackgroundImage
         backgroundColor={"#262626"}
         logoImage={require("./assets/logo.png")}
       >
