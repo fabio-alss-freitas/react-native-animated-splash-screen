@@ -1,5 +1,5 @@
 {
-  "name": "react-native-animated-splash-screen",
+  "name": "@freakycoder/react-native-animated-splash-screen",
   "version": "2.0.0",
   "private": false,
   "description": "Animated splash screen component for React Native project.",
