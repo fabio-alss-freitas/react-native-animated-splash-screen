@@ -29,16 +29,18 @@ Animated splash screen for Android and iOS. It is based on [Implementing Twitter
 
 ## Features
 
--   [x] Custom background color.
--   [x] Custom logo.
--   [x]  Custom logo size.
+- [x] Custom background color.
+- [x] Custom logo.
+- [x] Custom logo size.
 
 ## Installation
+
 `yarn add react-native-animated-splash-screen`
 or
 `npm install --save react-native-animated-splash-screen`
 
 ## Usage
+
 ```javascript
 import AnimatedSplash from "react-native-animated-splash-screen";
 
@@ -48,6 +50,7 @@ render() {
         isLoaded={this.state.isLoaded}
         logoImage={require("./assets/logo.png")}
         backgroundColor={"#262626"}
+        disableBackgroundImage
         logoHeight={150}
         logoWidht={150}
       >
@@ -58,36 +61,38 @@ render() {
 ```
 
 ## Props
-| Name            | Description                                     | Type    | Required |                        Default Value                        |
-| :-------------- | :---------------------------------------------- | :------ | :------: | :---------------------------------------------------------: |
-| isLoaded        | Condition to show children component and finish the animation. | Boolean |    ✓     |                                                             |
-| backgroundColor | Splash screen background color.              | String  |          | ![#f00](https://placehold.it/15/f00/000000?text=+) `'#f00'` |
-| logoImage       | Splash screen logo image. | Object |    ✓     |                                                             |
-| logoWidth       | Logo image width in `px`.                    | Number  |          |                             150                             |
-| logoHeight      | Logo image height in `px`.                   | Number  |          |                             150                             |
-| children        | Children to render inside this component.    | Node    |          |                           `null`                            |
-| preload         | Condition to load children component while wait isLoaded prop be True.   | Boolean |          |                            true                             |
 
+| Name                   | Description                                                            | Type    | Required |                        Default Value                        |
+| :--------------------- | :--------------------------------------------------------------------- | :------ | :------: | :---------------------------------------------------------: |
+| isLoaded               | Condition to show children component and finish the animation.         | Boolean |    ✓     |                                                             |
+| backgroundColor        | Splash screen background color.                                        | String  |          | ![#f00](https://placehold.it/15/f00/000000?text=+) `'#f00'` |
+| logoImage              | Splash screen logo image.                                              | Object  |    ✓     |                                                             |
+| logoWidth              | Logo image width in `px`.                                              | Number  |          |                             150                             |
+| logoHeight             | Logo image height in `px`.                                             | Number  |          |                             150                             |
+| children               | Children to render inside this component.                              | Node    |          |                           `null`                            |
+| preload                | Condition to load children component while wait isLoaded prop be True. | Boolean |          |                            true                             |
+| disableBackgroundImage | disable the background image                                           | Boolean |          |                            false                            |
 
 ## Example with React Navigation
+
 ```javascript
 const AppNavigator = createStackNavigator(
   {
     home: {
       screen: HomeScreen,
       navigationOptions: {
-        header: null
-      }
+        header: null,
+      },
     },
     dashboard: {
       screen: DashboardScreen,
       navigationOptions: {
-        title: "Dashboard"
-      }
-    }
+        title: "Dashboard",
+      },
+    },
   },
   {
-    initialRouteName: "home"
+    initialRouteName: "home",
   }
 );
 
@@ -95,7 +100,7 @@ const Container = createAppContainer(AppNavigator);
 
 class App extends React.Component {
   state = {
-    isLoaded: false
+    isLoaded: false,
   };
 
   async componentDidMount() {
@@ -122,19 +127,21 @@ export default App;
 ```
 
 ## Example with React Navigation (setting isLoaded inside a screen of navigator)
+
 #### Navigator
+
 ```javascript
 const AppNavigator = createSwitchNavigator(
   {
     home: {
-      screen: props => (
+      screen: (props) => (
         <HomeScreen {...props} setAppLoaded={props.screenProps.setAppLoaded} />
-      )
+      ),
     },
-    dashboard: { screen: DashboardScreen }
+    dashboard: { screen: DashboardScreen },
   },
   {
-    initialRouteName: "home"
+    initialRouteName: "home",
   }
 );
 
@@ -142,7 +149,7 @@ const Container = createAppContainer(AppNavigator);
 
 class App extends React.Component {
   state = {
-    isLoaded: false
+    isLoaded: false,
   };
 
   setAppLoaded = () => {
@@ -167,8 +174,8 @@ class App extends React.Component {
 export default App;
 ```
 
-
 #### HomeScreen
+
 ```javascript
 class HomeScreen extends React.Component {
 
@@ -178,7 +185,7 @@ class HomeScreen extends React.Component {
     await loadAsync();
     this.props.setAppLoaded();
   }
-  
+
 ...
 
 }
@@ -187,7 +194,9 @@ export default HomeScreen
 ```
 
 ## Author
+
 [Fabio Freitas](https://github.com/fabio-alss-freitas)
 
 ## License
+
 MIT
