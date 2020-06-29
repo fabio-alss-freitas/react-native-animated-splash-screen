@@ -1,6 +1,6 @@
 {
   "name": "react-native-animated-splash-screen",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "private": false,
   "description": "Animated splash screen component for React Native project.",
   "main": "index.js",

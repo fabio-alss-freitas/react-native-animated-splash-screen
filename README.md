@@ -10,6 +10,7 @@ Animated splash screen for Android and iOS. It is based on [Implementing Twitter
 [![Version](https://img.shields.io/npm/v/react-native-animated-splash-screen.svg)](https://www.npmjs.com/package/react-native-animated-splash-screen)
 [![npm](https://img.shields.io/npm/dt/react-native-animated-splash-screen.svg)](https://www.npmjs.com/package/react-native-animated-splash-screen)
 ![GitHub issues](https://img.shields.io/github/issues-raw/fabio-alss-freitas/react-native-animated-splash-screen)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green)](https://github.com/fabio-alss-freitas/react-native-animated-splash-screen/pulls)
 [![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-000.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://expo.io/)
 
 ![GitHub followers](https://img.shields.io/github/followers/fabio-alss-freitas?style=social)
@@ -68,17 +69,18 @@ render() {
 
 ## Props
 
-| Name                   | Description                                                                                                                                                                                      | Type    | Required |                        Default Value                        |
-| :--------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ | :------: | :---------------------------------------------------------: |
-| isLoaded               | Condition to show children component and finish the animation.                                                                                                                                   | Boolean |    ✓     |                                                             |
-| backgroundColor        | Splash screen background color.                                                                                                                                                                  | String  |          | ![#f00](https://placehold.it/15/f00/000000?text=+) `'#f00'` |
-| logoImage              | Splash screen logo image.                                                                                                                                                                        | Object  |    ✓     |                                                             |
-| logoWidth              | Logo image width in `px`.                                                                                                                                                                        | Number  |          |                             150                             |
-| logoHeight             | Logo image height in `px`.                                                                                                                                                                       | Number  |          |                             150                             |
-| children               | Children to render inside this component.                                                                                                                                                        | Node    |          |                           `null`                            |
-| preload                | Condition to load children component while wait isLoaded prop be True.                                                                                                                           | Boolean |          |                            true                             |
-| disableBackgroundImage | Disable the background image                                                                                                                                                                     | Boolean |          |                            false                            |
-| translucent            | When translucent is set to true, the app will draw under the status bar. Example: [here](https://github.com/fabio-alss-freitas/react-native-animated-splash-screen#example-of-translucent-prop)! | Boolean |          |                            false                            |
+| Name                   | Description                                                                                                                                                                                      | Type            | Required |                        Default Value                        |
+| :--------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------- | :------: | :---------------------------------------------------------: |
+| isLoaded               | Condition to show children component and finish the animation.                                                                                                                                   | Boolean         |    ✓     |                            false                            |
+| backgroundColor        | Splash screen background color.                                                                                                                                                                  | String          |          | ![#f00](https://placehold.it/15/f00/000000?text=+) `'#f00'` |
+| logoImage              | Splash screen logo image.                                                                                                                                                                        | Object          |          |                           `null`                            |
+| logoWidth              | Logo image width in `px`.                                                                                                                                                                        | Number          |          |                             150                             |
+| logoHeight             | Logo image height in `px`.                                                                                                                                                                       | Number          |          |                             150                             |
+| children               | Children to render inside this component.                                                                                                                                                        | Node            |          |                           `null`                            |
+| preload                | Condition to load children component while wait isLoaded prop be True.                                                                                                                           | Boolean         |          |                            true                             |
+| disableBackgroundImage | Disable the background image                                                                                                                                                                     | Boolean         |          |                            false                            |
+| translucent            | When translucent is set to true, the app will draw under the status bar. Example: [here](https://github.com/fabio-alss-freitas/react-native-animated-splash-screen#example-of-translucent-prop)! | Boolean         |          |                            false                            |
+| customComponent        | Add a logo component instead of a logo image.                                                                                                                                                    | React Component |          |                           `null`                            |
 
 ## Example with React Navigation
 
@@ -204,18 +206,16 @@ export default HomeScreen
 
 ## Example of translucent prop
 
-<p align="center" >
-  <kbd>
-    <img src="https://i.postimg.cc/8C4wzxZ6/ezgif-3-938850179141.gif" title="Demo" float="left">
-    <br>
-    <em>translucent={true}</em>
-  </kbd>
-  <kbd>
-    <img src="https://i.postimg.cc/J4Bs7Jp3/ezgif-3-24968f8730b0.gif" title="Demo" float="left">
-    <br>
-    <em>translucent={false}</em>
-  </kbd>
-</p>
+<kbd>
+  <img src="https://i.postimg.cc/8C4wzxZ6/ezgif-3-938850179141.gif" title="Demo" float="left">
+  <br>
+  <em>translucent={true}</em>
+</kbd>
+<kbd>
+  <img src="https://i.postimg.cc/J4Bs7Jp3/ezgif-3-24968f8730b0.gif" title="Demo" float="left">
+  <br>
+  <em>translucent={false}</em>
+</kbd>
 
 ## Author
 

@@ -1,26 +1,27 @@
 /* @flow */
-import PropTypes from "prop-types";
-import * as React from "react";
-import { View, Animated, StatusBar, StyleSheet } from "react-native";
+import PropTypes from "prop-types"
+import * as React from "react"
+import { View, Animated, StatusBar, StyleSheet } from "react-native"
 import styles, {
   _solidBackground,
   _dynamicLogoStyle,
+  _dynamicCustomComponentStyle,
   _dynamicImageBackground,
-} from "./AnimatedSplash.style";
+} from "./AnimatedSplash.style"
 
 class AnimatedSplash extends React.Component {
   static defaultProps = {
     isLoaded: false,
-  };
+  }
 
   state = {
     animationDone: false,
     loadingProgress: new Animated.Value(0),
-  };
+  }
 
   componentDidUpdate(prevProps) {
-    const { isLoaded } = this.props;
-    const { loadingProgress } = this.state;
+    const { isLoaded } = this.props
+    const { loadingProgress } = this.state
 
     if (isLoaded && !prevProps.isLoaded) {
       Animated.timing(loadingProgress, {
@@ -30,27 +31,27 @@ class AnimatedSplash extends React.Component {
       }).start(() => {
         this.setState({
           animationDone: true,
-        });
-      });
+        })
+      })
     }
   }
 
   renderChildren() {
-    const { children, preload, isLoaded } = this.props;
+    const { children, preload, isLoaded } = this.props
 
     if (preload || preload == null) {
-      return children;
+      return children
     } else {
       if (isLoaded) {
-        return children;
+        return children
       }
     }
 
-    return null;
+    return null
   }
 
   render() {
-    const { loadingProgress, animationDone } = this.state;
+    const { loadingProgress, animationDone } = this.state
     const {
       logoImage,
       logoWidth,
@@ -58,7 +59,9 @@ class AnimatedSplash extends React.Component {
       backgroundColor,
       imageBackgroundSource,
       imageBackgroundResizeMode,
-    } = this.props;
+      translucent,
+      customComponent,
+    } = this.props
 
     const opacityClearToVisible = {
       opacity: loadingProgress.interpolate({
@@ -66,7 +69,7 @@ class AnimatedSplash extends React.Component {
         outputRange: [0, 0, 1],
         extrapolate: "clamp",
       }),
-    };
+    }
 
     const imageScale = {
       transform: [
@@ -77,7 +80,7 @@ class AnimatedSplash extends React.Component {
           }),
         },
       ],
-    };
+    }
 
     const logoScale = {
       transform: [
@@ -88,7 +91,7 @@ class AnimatedSplash extends React.Component {
           }),
         },
       ],
-    };
+    }
 
     const logoOpacity = {
       opacity: loadingProgress.interpolate({
@@ -96,7 +99,7 @@ class AnimatedSplash extends React.Component {
         outputRange: [1, 0, 0],
         extrapolate: "clamp",
       }),
-    };
+    }
 
     const appScale = {
       transform: [
@@ -107,11 +110,15 @@ class AnimatedSplash extends React.Component {
           }),
         },
       ],
-    };
+    }
 
     return (
       <View style={[styles.container]}>
-        <StatusBar backgroundColor={backgroundColor || null} animated />
+        <StatusBar
+          backgroundColor={backgroundColor || null}
+          animated
+          translucent={translucent}
+        />
         {!animationDone && <View style={StyleSheet.absoluteFill} />}
         <View style={styles.containerGlue}>
           {!animationDone && (
@@ -135,21 +142,34 @@ class AnimatedSplash extends React.Component {
           )}
           {!animationDone && (
             <View style={[StyleSheet.absoluteFill, styles.logoStyle]}>
-              <Animated.Image
-                source={logoImage}
-                resizeMode={"contain"}
-                style={_dynamicLogoStyle(
-                  logoScale,
-                  logoOpacity,
-                  logoWidth,
-                  logoHeight
-                )}
-              />
+              {customComponent ? (
+                <Animated.View
+                  style={_dynamicCustomComponentStyle(
+                    logoScale,
+                    logoOpacity,
+                    logoWidth,
+                    logoHeight
+                  )}
+                >
+                  {customComponent}
+                </Animated.View>
+              ) : (
+                <Animated.Image
+                  source={logoImage}
+                  resizeMode={"contain"}
+                  style={_dynamicLogoStyle(
+                    logoScale,
+                    logoOpacity,
+                    logoWidth,
+                    logoHeight
+                  )}
+                />
+              )}
             </View>
           )}
         </View>
       </View>
-    );
+    )
   }
 }
 
@@ -165,7 +185,9 @@ AnimatedSplash.propTypes = {
     PropTypes.string,
     PropTypes.number,
     PropTypes.object,
-  ]).isRequired,
-};
+  ]),
+  translucent: PropTypes.bool,
+  customComponent: PropTypes.element,
+}
 
-export default AnimatedSplash;
+export default AnimatedSplash
