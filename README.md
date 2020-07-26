@@ -59,7 +59,7 @@ render() {
         logoImage={require("./assets/logo.png")}
         backgroundColor={"#262626"}
         logoHeight={150}
-        logoWidht={150}
+        logoWidth={150}
       >
         <App />
       </AnimatedSplash>
@@ -125,7 +125,7 @@ class App extends React.Component {
         logoImage={require("./assets/logo.png")}
         backgroundColor={"#262626"}
         logoHeight={150}
-        logoWidht={150}
+        logoWidth={150}
       >
         <Container />
       </AnimatedSplash>
@@ -174,7 +174,7 @@ class App extends React.Component {
         logoImage={require("./assets/logo.png")}
         backgroundColor={"#262626"}
         logoHeight={150}
-        logoWidht={150}
+        logoWidth={150}
       >
         <Container screenProps={{ setAppLoaded: this.setAppLoaded }} />
       </AnimatedSplash>
