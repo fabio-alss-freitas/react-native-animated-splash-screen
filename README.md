@@ -81,6 +81,7 @@ render() {
 | disableBackgroundImage | Disable the background image                                                                                                                                                                     | Boolean         |          |                            false                            |
 | translucent            | When translucent is set to true, the app will draw under the status bar. Example: [here](https://github.com/fabio-alss-freitas/react-native-animated-splash-screen#example-of-translucent-prop)! | Boolean         |          |                            false                            |
 | customComponent        | Add a logo component instead of a logo image.                                                                                                                                                    | React Component |          |                           `null`                            |
+| enableReset        | Allow to replay the splash animation based on the **isLoaded** prop                                                                                                                                                   | Boolean |          |                           false                            |
 
 ## Example with React Navigation
 
